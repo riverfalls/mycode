@@ -79,14 +79,17 @@ def main():
     newb_df_sort = newb_df.sort_values('count')                         #
     print(newb_df_sort)
 
-    print('\ntype =', end = ' ')
-    print(type(newb_df_sort))
+   # print('\ntype =', end = ' ')   #test purposes only
+   # print(type(newb_df_sort))      #test purposes only
 
 ##  following works but... #plot group by sp_code (species_code)
-    newb_df_sort.plot(kind='bar')
+    newb_df_sort.plot(x='name', y='count', kind='bar')
+   # newb_df_sort.plot(kind='bar')  #this works  #comment-out to test previous line
     plt.savefig('/home/student/static/birdplot.png', bbox_inches = 'tight')
 
     print('\n>  Chart printed to /home/student/static')
+    
+    #print(newb_df_sort.head())     #test purposes only
 
 #   search for western tanagers
 ##    input("\n")   ## when active, remove \n on next line 
