@@ -29,12 +29,12 @@ def main():
     grp_data = bird_df.groupby(['sp_code']).size()
     print(grp_data, end = " ")
 
-    input("\n")   ## when active, remove \n on next two lines 
-    #print('\n')
-    print('------------------------------------------------------------------') 
+##    input("\n")   ## when active, remove \n on next two lines 
+    print('\n')
+    print('\n------------------------------------------------------------------') 
     print('Figure 3. Filtering and sorting selected species (n=18).\n')
 
-    #create dictionary of (n=18) select species_code and common names
+    #create dictionary of (n=12) select species_code and common names
     b_dict = {
     "annhum":  {"name":"Anna's Hummingbird", "count":""},
     "balori":  {"name":"Baltimore Oriole", "count":""},
@@ -91,28 +91,23 @@ def main():
     
     #print(newb_df_sort.head())     #test purposes only
 
-#   search for any species_code
+#   search for western tanagers
 ##    input("\n")   ## when active, remove \n on next line 
     print('\n------------------------------------------------------------------')
 
-    count = 0
-    count_fig = 4
-    while count < 3:
-        count = count + 1
-        n = input("Enter species code to show locations:  ")
-        print(' ')
-        for x in b_dict:
-            if x == n:
-                print(f'Figure {count_fig}. Observed locations of ', end='') 
-                print(b_dict[x]['name'], end='') 
-                print('.\n')
-         #       options = b_dict[x][0]
-         #       print(options)
-                options = [n]
-                result_df = bird_df[bird_df['sp_code'].isin(options)]
-                result_locate = result_df.groupby(['location']).size()
-                print(result_locate, '\n')
-                count_fig = count_fig + 1
+    n = input("Enter species code: ")
+    print(' ')
+    for x in b_dict:
+        if x == n:
+            print('Figure 4. Observed locations of ', end='') 
+            print(b_dict[x]['name']) 
+            print(' ')
+     #       options = b_dict[x][0]
+     #       print(options)
+            options = [n]
+            result_df = bird_df[bird_df['sp_code'].isin(options)]
+            result_locate = result_df.groupby(['location']).size()
+            print(result_locate, '\n')
 
 if __name__ == "__main__":
     main()

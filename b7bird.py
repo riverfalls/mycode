@@ -95,6 +95,26 @@ def main():
 ##    input("\n")   ## when active, remove \n on next line 
     print('\n------------------------------------------------------------------')
 
+    #   ------------------------------------------------------
+    n = input("Enter species code for more data:  ")
+    #print(f">  I'm afraid we're fresh out of data on {n}, sir.\n")
+    print(">  I'm afraid we're fresh out of data on", end=" ")
+    print(b_dict[n]['name'], end="") 
+    print(", sir.\n")
+
+    n = input("Enter species code for more data:  ")
+    print(">  Never at the end of the week, sir.\n>  Always get it fresh first thing on Monday.\n")
+
+    n = input("Enter species code for more data:  ")
+    print(">  Ah well, it's been on order for two weeks, sir.\n>  I was expecting it this morning.")
+
+    input("\n")
+
+    print('------------------------------------------------------------------')
+
+    #   ------------------------------------------------------
+
+
     count = 0
     count_fig = 4
     while count < 3:
@@ -104,8 +124,8 @@ def main():
         for x in b_dict:
             if x == n:
                 print(f'Figure {count_fig}. Observed locations of ', end='') 
-                print(b_dict[x]['name'], end='') 
-                print('.\n')
+                print(b_dict[x]['name']) 
+                print(' ')
          #       options = b_dict[x][0]
          #       print(options)
                 options = [n]
