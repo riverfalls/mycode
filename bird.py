@@ -13,7 +13,6 @@ import pprint                                                       #import ppri
 def main():
 
     print("\nBird Count of North America, 2020-2021")               #display title of this project
-##    input("\n")  
     print('------------------------------------------------------------------')
     print("Figure 1. Reading dataset observations (n=2,897,105 x 22 columns).\n")
 
@@ -29,8 +28,7 @@ def main():
     grp_data = bird_df.groupby(['sp_code']).size()
     print(grp_data, end = " ")
 
-    input("\n")   ## when active, remove \n on next two lines 
-    #print('\n')
+    input("\n")  
     print('------------------------------------------------------------------') 
     print('Figure 3. Filtering and sorting selected species (n=18).\n')
 
@@ -55,44 +53,23 @@ def main():
     "bkhgro":  {"name":"Black-headed Grosbeak", "count":""},
     "greroa":  {"name":"Greater Roadrunner", "count":""}}    
 
-    ## above script works
 
     for bird in b_dict:
         spec_count = bird_df.groupby('sp_code')['obs_id'].count()[bird]
         b_dict[bird]["count"] = spec_count
 
-##  pprint.pprint(b_dict)
-    ### above script works; "for loop" is populating b_dict for subsequent use
-
-#   ------------------------------------------------------
-
-##    print('b_dict=', type(b_dict))
-##    print('spec_count=', type(spec_count))
-
-#    for bird2 in b_dict:                   #pulls out common names
-#        values = b_dict[bird2]["name"]
-#        print(values)
-#    print('values=', type(values))         #prints common names, one per line
-
-#   better output display
+#   create dataframe for plotting
     newb_df = pd.DataFrame.from_dict(b_dict, orient = 'index')          #
     newb_df_sort = newb_df.sort_values('count')                         #
     print(newb_df_sort)
 
-   # print('\ntype =', end = ' ')   #test purposes only
-   # print(type(newb_df_sort))      #test purposes only
-
-##  following works but... #plot group by sp_code (species_code)
+#   plot bar graph and save as .png to specified directory 
     newb_df_sort.plot(x='name', y='count', kind='bar')
-   # newb_df_sort.plot(kind='bar')  #this works  #comment-out to test previous line
     plt.savefig('/home/student/static/birdplot.png', bbox_inches = 'tight')
 
     print('\n>  Chart printed to /home/student/static')
     
-    #print(newb_df_sort.head())     #test purposes only
-
-#   search for any species_code
-##    input("\n")   ## when active, remove \n on next line 
+#   search location data for any species_code in custom dictionary above
     print('\n------------------------------------------------------------------')
 
     count = 0
@@ -106,8 +83,6 @@ def main():
                 print(f'Figure {count_fig}. Observed locations of ', end='') 
                 print(b_dict[x]['name'], end='') 
                 print('.\n')
-         #       options = b_dict[x][0]
-         #       print(options)
                 options = [n]
                 result_df = bird_df[bird_df['sp_code'].isin(options)]
                 result_locate = result_df.groupby(['location']).size()
