@@ -12,7 +12,7 @@ import pprint                                                       #import ppri
 
 def main():
 
-    print("\nBird Count of North America, 2020-2021")               #display title of this project
+    print("\nBird Count of North America, 2020 - 2021")               #display title of this project
     print('------------------------------------------------------------------')
     print("Figure 1. Reading dataset observations (n=2,897,105 x 22 columns).\n")
 
@@ -70,16 +70,18 @@ def main():
     print('\n>  Chart printed to /home/student/static')
     
 #   search location data for any species_code in custom dictionary above
-    print('\n------------------------------------------------------------------')
+    #print('\n------------------------------------------------------------------')
 
     count = 0
     count_fig = 4
     while count < 3:
         count = count + 1
+        print('\n------------------------------------------------------------------')
         n = input("Enter species code to show locations:  ")
         print(' ')
         for x in b_dict:
             if x == n:
+                #print('\n------------------------------------------------------------------')
                 print(f'Figure {count_fig}. Observed locations of ', end='') 
                 print(b_dict[x]['name'], end='') 
                 print('.\n')
@@ -88,6 +90,31 @@ def main():
                 result_locate = result_df.groupby(['location']).size()
                 print(result_locate, '\n')
                 count_fig = count_fig + 1
+##  new --- displays  mean, min, max 
+                result_stat = result_df.groupby(['location']).agg({'count': ['mean','min','max']})
+                print(result_stat)
+
+##  new --- search for unique observation identifier based on species code and count size 
+    print('\n------------------------------------------------------------------')
+    print('Search for location and unique observation identifier.\n')
+
+    set_1 = 0
+    while set_1 < 2:
+        set_1 = set_1 + 1
+        p = input("Enter species code:  ")
+        q = input("Enter count size:    ")
+        print(' ')
+        for y in b_dict:
+            if y == p:
+                print('>  Location and unique observation identifier (obs_id) for species')
+                print('  ', b_dict[y]['name'], end=' ')
+                print(f'({p}) with count size {q}:\n')
+                q_1 =int(q)
+                result2_df = bird_df[bird_df['sp_code'].str.contains(p)]
+                result3_df = result2_df.loc[result2_df['count'] == q_1]
+                print(result3_df, '\n'*2)
+
+    print('Thank you for watching this demonstration.\n')
 
 if __name__ == "__main__":
     main()
