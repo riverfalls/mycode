@@ -109,9 +109,8 @@ def main():
                 print('>  Location and unique observation identifier (obs_id) for species')
                 print('  ', b_dict[y]['name'], end=' ')
                 print(f'({p}) with count size {q}:\n')
-                q_1 =int(q)
                 result2_df = bird_df[bird_df['sp_code'].str.contains(p)]
-                result3_df = result2_df.loc[result2_df['count'] == q_1]
+                result3_df = result2_df.loc[result2_df['count'] == int(q)]
                 print(result3_df, '\n'*2)
 
     print('>  Thank you for visiting today. We hope to see you again soon.\n')
